@@ -54,7 +54,6 @@ export const VehicleSchema = z.object({
   engine: z.string().min(1),
   teamId: z.string().min(1),
   driverId: z.string().optional(), 
-  statistics: z.record(z.any()).optional(), 
 });
 
 export type VehicleType = z.infer<typeof VehicleSchema>;
