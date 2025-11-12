@@ -2,31 +2,165 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/faviconNew.jpg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/styles/main.css" />
-    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/dashboard.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ApexTracker - Dashboard</title>
-    <script type="module" src="/src/home.ts"></script>
   </head>
-
   <body>
-    <header>
-    <a href="/index.html" class="logo-link">
-      <h1>ApexTracker</h1>
-    </a>
-      <div class="nav-buttons">
+    <!-- Header -->
+    <header class="header">
+      <a href="/index.html" class="logo">ApexTracker</a>
+      <nav class="nav-buttons">
         <a href="/pages/login.html" class="btn btn-primary">Login</a>
         <a href="/pages/dashboard.html" class="btn btn-secondary">Dashboard</a>
-        <a href="/frontend/pages/garage.html" class="btn btn-secondary">Garage</a>
-      </div>
+      </nav>
     </header>
 
-Dashboard Page
+    <!-- Main Content -->
+    <main class="dashboard-content">
+      <h1>Dashboard</h1>
 
-    <footer>
-      <small>&copy; 2025 ApexTracker</small> |
-      <small><a href="./pages/impressum.html">Impressum</a></small>
+<!-- Tabellenabschnitt im HTML bleibt gleich, nur die th-Überschriften ändern -->
+<section>
+  <h2>Teams</h2>
+  <table id="teams-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>Drivers</th>
+        <th>Team Principal</th>
+        <th>Championships</th>
+        <th>Points</th>
+        <th>Place</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Drivers</h2>
+  <table id="drivers-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Nationality</th>
+        <th>Age</th>
+        <th>Championships</th>
+        <th>Team</th>
+        <th>Wins</th>
+        <th>Podiums</th>
+        <th>Points</th>
+        <th>Place</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Vehicles</h2>
+  <table id="vehicles-table">
+    <thead>
+      <tr>
+        <th>Model</th>
+        <th>Engine</th>
+        <th>Team</th>
+        <th>Drivers</th>
+        <th>Horsepower</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+      <hr>
+      <small>&copy; 2025 ApexTracker</small>
+      <small><a href="/pages/impressum.html">Impressum</a></small>
     </footer>
+
+    <!-- Script mit Daten und Tabelle -->
+    <script>
+      // TEAMS
+      const teams = [
+        { name: "Red Bull Racing Honda RBPT", country: "Austria", drivers: ["Max Verstappen","Sergio Pérez"], teamPrincipal: "Christian Horner", championships: 6, constructorPoints: 589, constructorPlace: 3 },
+        { name: "Mercedes", country: "United Kingdom", drivers: ["Lewis Hamilton","George Russell"], teamPrincipal: "Toto Wolff", championships: 8, constructorPoints: 468, constructorPlace: 4 },
+        { name: "Ferrari", country: "Italy", drivers: ["Charles Leclerc","Carlos Sainz"], teamPrincipal: "Frédéric Vasseur", championships: 16, constructorPoints: 652, constructorPlace: 2 },
+        { name: "McLaren Mercedes", country: "United Kingdom", drivers: ["Lando Norris","Oscar Piastri"], teamPrincipal: "Andrea Stella", championships: 9, constructorPoints: 666, constructorPlace: 1 },
+        { name: "Aston Martin Aramco Mercedes", country: "United Kingdom", drivers: ["Fernando Alonso","Lance Stroll"], teamPrincipal: "Mike Krack", championships: 0, constructorPoints: 94, constructorPlace: 5 },
+        { name: "Alpine Renault", country: "France", drivers: ["Esteban Ocon","Pierre Gasly"], teamPrincipal: "Oliver Oakes", championships: 2, constructorPoints: 65, constructorPlace: 6 },
+        { name: "Williams Mercedes", country: "United Kingdom", drivers: ["Alex Albon","Logan Sargeant"], teamPrincipal: "James Vowles", championships: 0, constructorPoints: 17, constructorPlace: 9 },
+        { name: "Haas Ferrari", country: "United States", drivers: ["Nico Hülkenberg","Kevin Magnussen"], teamPrincipal: "Ayao Komatsu", championships: 0, constructorPoints: 58, constructorPlace: 7 },
+        { name: "Kick Sauber Ferrari", country: "Switzerland", drivers: ["Valtteri Bottas","Zhou Guanyu"], teamPrincipal: "Bruno Famin", championships: 0, constructorPoints: 4, constructorPlace: 10 },
+        { name: "RB Honda RBPT", country: "Italy", drivers: ["Yuki Tsunoda","Daniel Ricciardo"], teamPrincipal: "Laurent Mekies", championships: 0, constructorPoints: 46, constructorPlace: 8 }
+      ];
+
+      // DRIVERS
+      const drivers = [
+        { name: "Max Verstappen", nationality: "Netherlands", age: 27, championships: 4, team: "Red Bull Racing Honda RBPT", wins: 9, podiums: 14, points: 437, place: 1 },
+        { name: "Sergio Pérez", nationality: "Mexico", age: 34, championships: 0, team: "Red Bull Racing Honda RBPT", wins: 0, podiums: 4, points: 152, place: 8 },
+        { name: "Lewis Hamilton", nationality: "United Kingdom", age: 39, championships: 7, team: "Mercedes", wins: 2, podiums: 5, points: 223, place: 7 },
+        { name: "George Russell", nationality: "United Kingdom", age: 26, championships: 0, team: "Mercedes", wins: 2, podiums: 4, points: 245, place: 6 },
+        { name: "Charles Leclerc", nationality: "Monaco", age: 27, championships: 0, team: "Ferrari", wins: 3, podiums: 13, points: 356, place: 3 },
+        { name: "Carlos Sainz", nationality: "Spain", age: 30, championships: 0, team: "Ferrari", wins: 2, podiums: 9, points: 290, place: 5 },
+        { name: "Lando Norris", nationality: "United Kingdom", age: 25, championships: 0, team: "McLaren Mercedes", wins: 4, podiums: 13, points: 374, place: 2 },
+        { name: "Oscar Piastri", nationality: "Australia", age: 23, championships: 0, team: "McLaren Mercedes", wins: 2, podiums: 0, points: 292, place: 4 },
+        { name: "Fernando Alonso", nationality: "Spain", age: 43, championships: 2, team: "Aston Martin Aramco Mercedes", wins: 0, podiums: 0, points: 70, place: 9 },
+        { name: "Lance Stroll", nationality: "Canada", age: 26, championships: 0, team: "Aston Martin Aramco Mercedes", wins: 0, podiums: 0, points: 24, place: 13 },
+        { name: "Esteban Ocon", nationality: "France", age: 29, championships: 0, team: "Alpine Renault", wins: 0, podiums: 1, points: 23, place: 14 },
+        { name: "Pierre Gasly", nationality: "France", age: 29, championships: 0, team: "Alpine Renault", wins: 0, podiums: 1, points: 42, place: 10 },
+        { name: "Alex Albon", nationality: "Thailand", age: 28, championships: 0, team: "Williams Mercedes", wins: 0, podiums: 0, points: 12, place: 17 },
+        { name: "Logan Sargeant", nationality: "United States", age: 24, championships: 0, team: "Williams Mercedes", wins: 0, podiums: 0, points: 0, place: 20 },
+        { name: "Nico Hülkenberg", nationality: "Germany", age: 37, championships: 0, team: "Haas Ferrari", wins: 0, podiums: 0, points: 22, place: 15 },
+        { name: "Kevin Magnussen", nationality: "Denmark", age: 32, championships: 0, team: "Haas Ferrari", wins: 0, podiums: 0, points: 8, place: 18 },
+        { name: "Valtteri Bottas", nationality: "Finland", age: 35, championships: 0, team: "Kick Sauber Ferrari", wins: 0, podiums: 0, points: 0, place: 19 },
+        { name: "Zhou Guanyu", nationality: "China", age: 26, championships: 0, team: "Kick Sauber Ferrari", wins: 0, podiums: 0, points: 4, place: 18 },
+        { name: "Yuki Tsunoda", nationality: "Japan", age: 24, championships: 0, team: "RB Honda RBPT", wins: 0, podiums: 0, points: 30, place: 12 },
+        { name: "Daniel Ricciardo", nationality: "Australia", age: 35, championships: 0, team: "RB Honda RBPT", wins: 0, podiums: 0, points: 12, place: 16 }
+      ];
+
+      // VEHICLES
+      const vehicles = [
+        { model: "RB20", engine: "Honda RBPT", team: "Red Bull Racing Honda RBPT", drivers: ["Max Verstappen","Sergio Pérez"], horsepower: 1050, year: 2024 },
+        { model: "W15", engine: "Mercedes", team: "Mercedes", drivers: ["Lewis Hamilton","George Russell"], horsepower: 1030, year: 2024 },
+        { model: "SF-24", engine: "Ferrari", team: "Ferrari", drivers: ["Charles Leclerc","Carlos Sainz"], horsepower: 1040, year: 2024 },
+        { model: "MCL38", engine: "Mercedes", team: "McLaren Mercedes", drivers: ["Lando Norris","Oscar Piastri"], horsepower: 1020, year: 2024 },
+        { model: "AMR24", engine: "Mercedes", team: "Aston Martin Aramco Mercedes", drivers: ["Fernando Alonso","Lance Stroll"], horsepower: 1025, year: 2024 },
+        { model: "A524", engine: "Renault", team: "Alpine Renault", drivers: ["Esteban Ocon","Pierre Gasly"], horsepower: 1010, year: 2024 },
+        { model: "FW46", engine: "Mercedes", team: "Williams Mercedes", drivers: ["Alex Albon","Logan Sargeant"], horsepower: 1005, year: 2024 },
+        { model: "VF-24", engine: "Ferrari", team: "Haas Ferrari", drivers: ["Nico Hülkenberg","Kevin Magnussen"], horsepower: 1000, year: 2024 },
+        { model: "C44", engine: "Ferrari", team: "Kick Sauber Ferrari", drivers: ["Valtteri Bottas","Zhou Guanyu"], horsepower: 1000, year: 2024 },
+        { model: "VCARB 01", engine: "Honda RBPT", team: "RB Honda RBPT", drivers: ["Yuki Tsunoda","Daniel Ricciardo"], horsepower: 1015, year: 2024 }
+      ];
+
+      // Tabelle rendern
+      const renderTable = (array, tableId, keys) => {
+        const tbody = document.querySelector(`#${tableId} tbody`);
+        tbody.innerHTML = "";
+        array.forEach(item => {
+          const tr = document.createElement('tr');
+          keys.forEach(key => {
+            const td = document.createElement('td');
+            let value = item[key];
+            if (Array.isArray(value)) value = value.join(', ');
+            if (value === undefined || value === null) value = 0;
+            td.textContent = value;
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      };
+
+ renderTable(teams, 'teams-table', ['name','country','drivers','teamPrincipal','championships','constructorPoints','constructorPlace']);
+renderTable(drivers, 'drivers-table', ['name','nationality','age','championships','team','wins','podiums','points','place']);
+renderTable(vehicles, 'vehicles-table', ['model','engine','team','drivers','horsepower','year']);
+    </script>
   </body>
 </html>
