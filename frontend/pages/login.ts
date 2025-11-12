@@ -1,5 +1,5 @@
 // frontend/pages/login.ts
-const apiUrl = "http://localhost:3000/api/auth/login";
+const loginapiUrl = "http://localhost:3000/api/auth/login";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("login-form") as HTMLFormElement;
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const email = (document.getElementById("email") as HTMLInputElement).value;
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
-    const response = await fetch(apiUrl, {
+    const response = await fetch(loginapiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

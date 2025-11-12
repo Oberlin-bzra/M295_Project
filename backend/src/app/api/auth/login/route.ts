@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   const user = users.find((u) => u.email === email && u.password === password);
 
   if (!user) {
-    return NextResponse.json({ message: "Ungültige Anmeldedaten" }, { status: 401 });
+    return NextResponse.json({ message: "Wrong login" }, { status: 401 });
   }
 
   const secret = new TextEncoder().encode("supersecretjwtkey");
