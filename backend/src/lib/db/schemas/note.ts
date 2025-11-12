@@ -1,6 +1,5 @@
 import { z } from 'zod';
 
-// Garage Schema
 export const GarageSchema = z.object({
   savedTeams: z.array(z.string()).default([]),
   savedDrivers: z.array(z.string()).default([]),
@@ -8,7 +7,6 @@ export const GarageSchema = z.object({
 }).default({});
 export type GarageType = z.infer<typeof GarageSchema>;
 
-// User Schema
 export const UserSchema = z.object({
   _id: z.string().optional(),
   username: z.string().min(3),
@@ -21,7 +19,6 @@ export const UserSchema = z.object({
 });
 export type UserType = z.infer<typeof UserSchema>;
 
-// Driver Schema
 export const DriverSchema = z.object({
   _id: z.string().optional(),
   name: z.string().min(1),
@@ -36,7 +33,6 @@ export const DriverSchema = z.object({
 });
 export type DriverType = z.infer<typeof DriverSchema>;
 
-// Team Schema
 export const TeamSchema = z.object({
   _id: z.string().optional(),
   name: z.string().min(1),
@@ -49,7 +45,6 @@ export const TeamSchema = z.object({
 });
 export type TeamType = z.infer<typeof TeamSchema>;
 
-// Vehicle Schema
 export const VehicleSchema = z.object({
   _id: z.string().optional(),
   model: z.string().min(1),

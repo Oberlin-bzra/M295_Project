@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 // Stellt sicher, dass das Backend auf Port 3000 läuft
 const registerApiUrl = "http://localhost:3000/api/auth/register";
+=======
+const registerapiUrl = "http://localhost:3000/api/auth/register";
+>>>>>>> 27174dcb08b1092741bd5035c89a2933850222b6
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("register-form") as HTMLFormElement;
