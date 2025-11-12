@@ -81,4 +81,18 @@ table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+th {
+  position: relative;
+  padding-right: 1.5rem;
+}
 
+.sort-arrow {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  position: absolute;
+  right: 0.4rem;
+}
+
+th:hover .sort-arrow {
+  opacity: 1;
+}

@@ -10,7 +10,6 @@
         font-family: sans-serif;
       }
 
-      /* Header */
       header {
         display: flex;
         justify-content: space-between;
@@ -53,7 +52,6 @@
         background-color: #444;
       }
 
-        /* Main Content */
       .hero {
         text-align: center;
         margin-top: 5rem;
@@ -68,7 +66,7 @@
         .hero-image {
         width: 100%;
         max-height: 400px;
-        object-fit: cover; /* schneidet schön zu */
+        object-fit: cover; 
         margin-bottom: 1.5rem;
         }
 
@@ -78,7 +76,6 @@
         color: #333;
       }
 
-      /* Footer */
       footer {
         text-align: center;
         padding: 1rem;
@@ -120,7 +117,7 @@ header h1 {
 }
 
 .logo-link:hover h1 {
-  color: #e10600; /* Hover-Effekt für Logo */
+  color: #e10600; 
 }
 
 .nav-buttons a {
@@ -154,5 +151,5 @@ footer {
   color: #555;
   background-color: #f1f1f1;
   border-top: 1px solid #ccc;
-  margin-top: auto; /* Footer am unteren Rand halten */
+  margin-top: auto;
 }

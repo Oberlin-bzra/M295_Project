@@ -161,6 +161,86 @@
  renderTable(teams, 'teams-table', ['name','country','drivers','teamPrincipal','championships','constructorPoints','constructorPlace']);
 renderTable(drivers, 'drivers-table', ['name','nationality','age','championships','team','wins','podiums','points','place']);
 renderTable(vehicles, 'vehicles-table', ['model','engine','team','drivers','horsepower','year']);
+
+function makeTableSortable(tableId) {
+  const table = document.getElementById(tableId);
+  const headers = table.querySelectorAll('th');
+  const tbody = table.querySelector('tbody');
+
+  headers.forEach((header, index) => {
+    header.style.cursor = 'pointer';
+    header.style.userSelect = 'none';
+    header.style.position = 'relative';
+    header.innerHTML += ' <span class="sort-arrow">↕</span>';
+
+    header.addEventListener('click', () => {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+      const isNumeric = !isNaN(rows[0].children[index].textContent.trim());
+      const ascending = header.dataset.asc !== 'true';
+      header.dataset.asc = ascending;
+
+      // Entfernt Pfeile bei anderen Spalten
+      headers.forEach(h => {
+        const arrow = h.querySelector('.sort-arrow');
+        if (arrow) arrow.textContent = '↕';
+      });
+
+      // Richtigen Pfeil setzen
+      const arrow = header.querySelector('.sort-arrow');
+      if (arrow) arrow.textContent = ascending ? '▲' : '▼';
+
+      // Sortieren
+      rows.sort((a, b) => {
+        let valA = a.children[index].textContent.trim();
+        let valB = b.children[index].textContent.trim();
+
+        if (isNumeric) {
+          valA = parseFloat(valA);
+          valB = parseFloat(valB);
+        }
+
+        if (valA < valB) return ascending ? -1 : 1;
+        if (valA > valB) return ascending ? 1 : -1;
+        return 0;
+      });
+
+      // Sortierte Zeilen neu einfügen
+      rows.forEach(row => tbody.appendChild(row));
+    });
+  });
+}
+
+// Nach Tabellen-Generierung aufrufen
+makeTableSortable('teams-table');
+makeTableSortable('drivers-table');
+makeTableSortable('vehicles-table');
     </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Dropdown schließen bei Klick außerhalb
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.feedback-dropdown')) {
+      document.querySelectorAll('.dropdown-content').forEach((el) =>
+        el.classList.remove('show')
+      );
+    }
+  });
+
+  // Header ein-/ausblenden beim Scrollen
+  const header = document.querySelector('header');
+  let lastScrollY = window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    if (!header) return;
+    if (window.scrollY > lastScrollY && window.scrollY > 80) {
+      header.style.top = '-150px';
+    } else {
+      header.style.top = '0';
+    }
+    lastScrollY = window.scrollY;
+  });
+});
+</script>
+
   </body>
 </html>
