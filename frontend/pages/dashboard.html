@@ -5,26 +5,27 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/darkmode.ts"></script>
     <title>ApexTracker - Dashboard</title>
   </head>
   <body>
-    <!-- Header -->
-    <header class="header">
-     <a href="/index.html" class="logo-link">
-      <h1>ApexTracker</h1>
-    </a>
-      <div class="nav-buttons">
-        <a href="/pages/login.html" class="btn btn-primary">Login</a>
-        <a href="/pages/dashboard.html" class="btn btn-secondary">Dashboard</a>
-        <a href="/pages/garage.html" class="btn btn-secondary">Garage</a>
-      </div>
-    </header>
+<header>
+  <a href="/index.html" class="logo-link">
+    <h1>ApexTracker</h1>
+  </a>
+  <div class="nav-buttons">
+    <a href="/pages/login.html" class="btn btn-primary">Login</a>
+    <a href="/pages/dashboard.html" class="btn btn-secondary">Dashboard</a>
+    <a href="/pages/garage.html" class="btn btn-secondary">Garage</a>
+    <button id="darkmode-btn" class="btn btn-darkmode">🌙</button>
+  </div>
+</header>
 
-    <!-- Main Content -->
+
+
     <main class="dashboard-content">
       <h1>Dashboard</h1>
 
-<!-- Tabellenabschnitt im HTML bleibt gleich, nur die th-Überschriften ändern -->
 <section>
   <h2>Teams</h2>
   <table id="teams-table">
@@ -81,13 +82,12 @@
 </section>
 
 
-    <!-- Footer -->
     <footer>
       <small>&copy; 2025 ApexTracker</small> |
       <small><a href="./impressum.html">Impressum</a></small>
     </footer>
 
-    <!-- Script mit Daten und Tabelle -->
+
     <script>
       // TEAMS
       const teams = [
@@ -180,17 +180,14 @@ function makeTableSortable(tableId) {
       const ascending = header.dataset.asc !== 'true';
       header.dataset.asc = ascending;
 
-      // Entfernt Pfeile bei anderen Spalten
       headers.forEach(h => {
         const arrow = h.querySelector('.sort-arrow');
         if (arrow) arrow.textContent = '↕';
       });
 
-      // Richtigen Pfeil setzen
       const arrow = header.querySelector('.sort-arrow');
       if (arrow) arrow.textContent = ascending ? '▲' : '▼';
 
-      // Sortieren
       rows.sort((a, b) => {
         let valA = a.children[index].textContent.trim();
         let valB = b.children[index].textContent.trim();
@@ -205,20 +202,17 @@ function makeTableSortable(tableId) {
         return 0;
       });
 
-      // Sortierte Zeilen neu einfügen
       rows.forEach(row => tbody.appendChild(row));
     });
   });
 }
 
-// Nach Tabellen-Generierung aufrufen
 makeTableSortable('teams-table');
 makeTableSortable('drivers-table');
 makeTableSortable('vehicles-table');
     </script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // Dropdown schließen bei Klick außerhalb
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.feedback-dropdown')) {
       document.querySelectorAll('.dropdown-content').forEach((el) =>
@@ -227,7 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Header ein-/ausblenden beim Scrollen
   const header = document.querySelector('header');
   let lastScrollY = window.scrollY;
 
