@@ -1,13 +1,11 @@
 const darkModeBtn = document.getElementById("darkmode-btn") as HTMLButtonElement;
 const body = document.body;
 
-// Prüfen, ob Dark Mode in localStorage gespeichert ist
 const savedMode = localStorage.getItem("darkMode");
 if (savedMode === "enabled") {
   body.classList.add("dark-mode");
 }
 
-// Dark Mode umschalten und speichern
 darkModeBtn.addEventListener("click", () => {
   body.classList.toggle("dark-mode");
   if (body.classList.contains("dark-mode")) {
@@ -17,7 +15,6 @@ darkModeBtn.addEventListener("click", () => {
   }
 });
 
-// Dynamisches Styling für Dark Mode
 const style = document.createElement("style");
 style.innerHTML = `
 /* Dark Mode */

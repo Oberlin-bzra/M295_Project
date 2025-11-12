@@ -1,4 +1,3 @@
-// frontend/pages/register.ts
 const registerapiUrl = "http://localhost:3000/api/auth/register";
 
 document.addEventListener("DOMContentLoaded", () => {

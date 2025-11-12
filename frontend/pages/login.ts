@@ -1,4 +1,3 @@
-// frontend/pages/login.ts
 const loginapiUrl = "http://localhost:3000/api/auth/login";
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,1 +1,1 @@
-
+//Main TypeScript file
