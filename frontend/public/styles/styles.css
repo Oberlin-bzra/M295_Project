@@ -316,3 +316,79 @@ footer a:hover {
   color: #e10600;
 }
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #111;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: background 0.3s, color 0.3s;
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+}
+.nav-buttons a, .nav-buttons button {
+  margin-left: 0.75rem;
+  text-decoration: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  cursor: pointer;
+  font-weight: 700;
+  border: none;
+}
+
+.nav-buttons a.btn-primary {
+  background: #e10600;
+  color: #fff;
+}
+.nav-buttons a.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+.nav-buttons a.btn-secondary {
+  background: #333;
+  color: #fff;
+}
+.nav-buttons a.btn-secondary:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.18); }
+
+#darkmode-btn {
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 1rem;
+  display: inline-flex; 
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  vertical-align: middle; 
+  position: relative;
+  top: -12px; /* minimale Korrektur für Pixelgenauigkeit */
+}
+
+#darkmode-btn:hover {
+  background-color: #666;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#darkmode-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+#darkmode-btn span {
+  font-size: 1.2rem;
+  line-height: 1;
+}
