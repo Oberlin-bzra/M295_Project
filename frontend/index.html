@@ -4,28 +4,26 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/home.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ApexTracker</title>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/home.ts"></script>
   </head>
   <body>
-      <h1>ApexTracker</h1>
+    <div class="hero">
+      <h1>🏎️ ApexTracker</h1>
+      <p class="subtitle">Dein ultimativer F1 Daten-Tracker</p>
+      
+      <div class="hero-buttons">
+        <a href="/pages/login.html" class="btn btn-primary">Login</a>
+        <a href="/pages/dashboard.html" class="btn btn-secondary">Dashboard</a>
+      </div>
+    </div>
 
-<br><br><br><br>
-
-
-    <h1>TypeScript-Vorlage</h1>
-    <p>Siehe TypeScript-File Source unter <code>/src/main.ts</code>.</p>
-    <p>Die Kompilation des TS-Codes in JavaScript erfolgt in der <code>WebNative</code> Extension &gt; <code>Build</code> oder alternativ über die Konsole mittels <code>npm run build</code> im Root-Ordner (oberste Ebene, wo das <code>package.json</code> File liegt). Das kompilierte (übersetzte) JavaScript File ist im Anschluss unter scripts <code>/dist/assets/index-[XYZ].js</code> verfügbar.</p>
-    <p>Der Live Reload (automatische Aktualisierung, sobald das <code>main.ts</code> ändert) kann in der <code>WebNative</code> Extension gestartet werden.</p>
-
-    <h2>Fügen Sie hier Ihren HTML-Code ein. Verändern Sie nur den <code>&lt;body&gt;</code>-Tag im <code>index.html</code> File.</h2>
-    
+    <footer>
+      <hr>
+      <small>&copy; 2024 ApexTracker</small>
+      <small><a href="./pages/impressum.html">Impressum</a></small>
+    </footer>
   </body>
-
-  <footer>
-    <hr>
-    <small>&copy; 2024 ApexTracker</small>
-    <small><a href="./pages/impressum.html">Impressum</a></small>
-  </footer>
 </html>

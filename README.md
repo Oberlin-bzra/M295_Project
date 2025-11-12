@@ -1,6 +1,5 @@
 # M295-Project | Apex Tracker
 
-
 # 🏎️ Apex Tracker
 
 **Beschreibung:**
@@ -14,3 +13,7 @@ Es zeigt Authentifizierung (Webnative / JWT), CRUD-Funktionen und Benutzerrollen
 
 **Technologien:**
 Next.js · TypeScript · MongoDB (NoSQL) · JWT / Webnative
+
+
+
+© 2025 Noel Oberlin und Felix Vogele
