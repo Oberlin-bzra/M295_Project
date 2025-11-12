@@ -1,15 +1,15 @@
 // TEAMS 
 export const teams = [
-  { _id: "team_RB", name: "Red Bull Racing Honda RBPT", country: "Austria", drivers: ["driver_VER", "driver_PER"], teamPrincipal: Christian Horner, championships: 6, constructorPoints: 589, constructorPlace: 3 },
-  { _id: "team_MER", name: "Mercedes", country: "United Kingdom", drivers: ["driver_HAM", "driver_RUS"], teamPrincipal: Toto Wolff, championships: 8, constructorPoints: 468, constructorPlace: 4 },
-  { _id: "team_FER", name: "Ferrari", country: "Italy", drivers: ["driver_LEC", "driver_SAI"], teamPrincipal: Frédéric Vasseur, championships: 16, constructorPoints: 652, constructorPlace: 2 },
-  { _id: "team_MCL", name: "McLaren Mercedes", country: "United Kingdom", drivers: ["driver_NOR", "driver_PIA"], teamPrincipal: Andrea Stella, championships: 9, constructorPoints: 666, constructorPlace: 1 },
-  { _id: "team_AST", name: "Aston Martin Aramco Mercedes", country: "United Kingdom", drivers: ["driver_ALO", "driver_STR"], teamPrincipal: Mike Krack, constructorPoints: 94, constructorPlace: 5 },
-  { _id: "team_ALP", name: "Alpine Renault", country: "France", drivers: ["driver_OCO", "driver_GAS"], teamPrincipal: Oliver Oakes, championships: 2, constructorPoints: 65, constructorPlace: 6 },
-  { _id: "team_WIL", name: "Williams Mercedes", country: "United Kingdom", drivers: ["driver_ALB", "driver_SAR"], teamPrincipal: James Vowles, championships: 9, constructorPoints: 17, constructorPlace: 9 },
-  { _id: "team_HAA", name: "Haas Ferrari", country: "United States", drivers: ["driver_HUL", "driver_MAG"], teamPrincipal: Ayao Komatsu, constructorPoints: 58, constructorPlace: 7 },
-  { _id: "team_KSA", name: "Kick Sauber Ferrari", country: "Switzerland", drivers: ["driver_BOT", "driver_ZHO"], teamPrincipal: Bruno Famin, constructorPoints: 4, constructorPlace: 10 },
-  { _id: "team_RB2", name: "RB Honda RBPT", country: "Italy", drivers: ["driver_TSU", "driver_RIC"], teamPrincipal: Laurent Mekies, constructorPoints: 46, constructorPlace: 8 },
+  { _id: "team_RB", name: "Red Bull Racing Honda RBPT", country: "Austria", drivers: ["driver_VER", "driver_PER"], teamPrincipal: "Christian Horner", championships: 6, constructorPoints: 589, constructorPlace: 3 },
+  { _id: "team_MER", name: "Mercedes", country: "United Kingdom", drivers: ["driver_HAM", "driver_RUS"], teamPrincipal: "Toto Wolff", championships: 8, constructorPoints: 468, constructorPlace: 4 },
+  { _id: "team_FER", name: "Ferrari", country: "Italy", drivers: ["driver_LEC", "driver_SAI"], teamPrincipal: "Frédéric Vasseur", championships: 16, constructorPoints: 652, constructorPlace: 2 },
+  { _id: "team_MCL", name: "McLaren Mercedes", country: "United Kingdom", drivers: ["driver_NOR", "driver_PIA"], teamPrincipal: "Andrea Stella", championships: 9, constructorPoints: 666, constructorPlace: 1 },
+  { _id: "team_AST", name: "Aston Martin Aramco Mercedes", country: "United Kingdom", drivers: ["driver_ALO", "driver_STR"], teamPrincipal: "Mike Krack", constructorPoints: 94, constructorPlace: 5 },
+  { _id: "team_ALP", name: "Alpine Renault", country: "France", drivers: ["driver_OCO", "driver_GAS"], teamPrincipal: "Oliver Oakes", championships: 2, constructorPoints: 65, constructorPlace: 6 },
+  { _id: "team_WIL", name: "Williams Mercedes", country: "United Kingdom", drivers: ["driver_ALB", "driver_SAR"], teamPrincipal: "James Vowles", championships: 9, constructorPoints: 17, constructorPlace: 9 },
+  { _id: "team_HAA", name: "Haas Ferrari", country: "United States", drivers: ["driver_HUL", "driver_MAG"], teamPrincipal: "Ayao Komatsu", constructorPoints: 58, constructorPlace: 7 },
+  { _id: "team_KSA", name: "Kick Sauber Ferrari", country: "Switzerland", drivers: ["driver_BOT", "driver_ZHO"], teamPrincipal: "Bruno Famin", constructorPoints: 4, constructorPlace: 10 },
+  { _id: "team_RB2", name: "RB Honda RBPT", country: "Italy", drivers: ["driver_TSU", "driver_RIC"], teamPrincipal: "Laurent Mekies", constructorPoints: 46, constructorPlace: 8 },
 ];
 
 // DRIVERS 
@@ -21,7 +21,7 @@ export const drivers = [
   { _id: "driver_LEC", name: "Charles Leclerc", nationality: "Monaco", age: 27, teamId: "team_FER", wins: 3, podiums: 13, driverPoints: 356, driverPlace: 3 },
   { _id: "driver_SAI", name: "Carlos Sainz", nationality: "Spain", age: 30, teamId: "team_FER", wins: 2, podiums: 9, driverPoints: 290, driverPlace: 5 },
   { _id: "driver_NOR", name: "Lando Norris", nationality: "United Kingdom", age: 25, teamId: "team_MCL", wins: 4, podiums: 13, driverPoints: 374, driverPlace: 2 },
-  { _id: "driver_PIA", name: "Oscar Piastri", nationality: "Australia", age: 23, teamId: "team_MCL", wins: 2, podiums: , driverPoints: 292, driverPlace: 4 },
+  { _id: "driver_PIA", name: "Oscar Piastri", nationality: "Australia", age: 23, teamId: "team_MCL", wins: 2, podiums: 8, driverPoints: 292, driverPlace: 4 },
   { _id: "driver_ALO", name: "Fernando Alonso", nationality: "Spain", age: 43, championships: 2, teamId: "team_AST", wins: 0, podiums: 0, driverPoints: 70, driverPlace: 9 },
   { _id: "driver_STR", name: "Lance Stroll", nationality: "Canada", age: 26, teamId: "team_AST", wins: 0, podiums: 0, driverPoints: 24, driverPlace: 13 },
   { _id: "driver_OCO", name: "Esteban Ocon", nationality: "France", age: 29, teamId: "team_ALP", wins: 0, podiums: 1, driverPoints: 23, driverPlace: 14 },
