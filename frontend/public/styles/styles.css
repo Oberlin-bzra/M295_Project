@@ -232,3 +232,100 @@ footer a {
 footer a:hover {
   text-decoration: underline;
 }
+
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  color: #e10600;
+  font-weight: 600;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.back-link::before {
+  content: "← ";
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #c50500;
+  transform: translateX(-3px);
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: white; 
+  font-size: 0.95rem;
+}
+
+.register-link a {
+  color: #e10600; 
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.register-link a:hover {
+  color: #c50500; 
+  text-decoration: underline;
+}
+
+.login-container p {
+  color: white; 
+}
+
+.login-container label {
+  display: block;
+  margin-top: 1rem;
+  color: white; 
+  font-weight: 500;
+}
+
+/* Labels in Formularen */
+.login-container label {
+  display: block;
+  margin-top: 1rem;
+  color: white; /* Weißer Text */
+  font-weight: 500;
+}
+
+/* Register-Link */
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: white; /* Weißer Text */
+  font-size: 0.95rem;
+}
+
+.register-link a {
+  color: #e10600; /* Roter Link passend zu Buttons */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.register-link a:hover {
+  color: #c50500; /* Dunkleres Rot beim Hover */
+  text-decoration: underline;
+}
+
+/* Back-Link */
+.back-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  text-decoration: none;
+  color: white; /* Weißer Text auf dunklem Hintergrund */
+  font-weight: 600;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.back-link::before {
+  content: "← ";
+  font-weight: bold;
+}
+
+.back-link:hover {
+  color: #e10600; /* Rot beim Hover */
+  transform: translateX(-3px);
+}
