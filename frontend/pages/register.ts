@@ -1,4 +1,3 @@
-// Stellt sicher, dass das Backend auf Port 3000 läuft
 const registerApiUrl = "http://localhost:3000/api/auth/register";
 
 const registerapiUrl = "http://localhost:3000/api/auth/register";

@@ -1,6 +1,3 @@
-/**
- * Solution Exercise 5.
- */
 import { NextRequest } from 'next/server'
 import bcrypt from 'bcryptjs'
 import z from 'zod'
@@ -12,14 +9,11 @@ const CredentialDto = z.object({
   password: z.string(),
 })
 
-/**
- * POST: api/users/register
- */
+
 export const POST = async function(request: NextRequest) {
   const { data, error } = CredentialDto.safeParse(await request.json());
   if (error) { return Response.json({ message: "Bad Request" }, { status: 400 }) }
 
-  // optional iv)
   const user = await userDb().findOneAsync({ email: data.email });
   if (user) { return Response.json({ }, { status: 409 }) }
 

@@ -1,6 +1,4 @@
- 
-// Stellt sicher, dass das Backend auf Port 3000 läuft
-const loginApiUrl = "http://localhost:3000/api/auth/login";
+ const loginApiUrl = "http://localhost:3000/api/auth/login";
 
 const loginapiUrl = "http://localhost:3000/api/auth/login";
 
@@ -24,10 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await res.json();
       if (res.ok && data.token) {
-        localStorage.setItem("token", data.token); // Token im Browser speichern
+        localStorage.setItem("token", data.token); 
         message.textContent = "Login successful. Redirecting...";
         message.className = "success";
-        // Hier zur geschützten Seite weiterleiten
         setTimeout(() => (window.location.href = "/dashboard.html"), 800); 
       } else {
         message.textContent = data.message || "Login failed";

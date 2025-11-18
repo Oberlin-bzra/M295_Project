@@ -374,7 +374,7 @@ header {
   height: 34px;
   vertical-align: middle; 
   position: relative;
-  top: -12px; /* minimale Korrektur für Pixelgenauigkeit */
+  top: -12px; 
 }
 
 #darkmode-btn:hover {
