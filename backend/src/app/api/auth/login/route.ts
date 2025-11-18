@@ -1,36 +1,31 @@
-import { NextRequest, NextResponse } from "next/server";
-import { SignJWT } from "jose";
-import { db } from "../../../../lib/db/db"; // Pfad ggf. anpassen, z.B. ../../lib/db
+/**
+ * Solution Exercise 5.
+ */
+import { NextRequest } from 'next/server'
+import bcrypt from 'bcryptjs'
+import z from 'zod'
+import { generateToken } from '@/lib/jwt/jwt-generator'
+import { userDb } from '@/lib/db/schemas/user'
 
-// Dieses Secret MUSS in einer .env Datei liegen
-const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET || "supersecretjwtkey");
+const CredentialDto = z.object({
+  email: z.string(),
+  password: z.string(),
+})
 
-export async function POST(req: NextRequest) {
-  try {
-    const { email, password } = await req.json();
-    if (!email || !password) {
-      return NextResponse.json({ message: "Email and password required" }, { status: 400 });
-    }
+/**
+ * POST: api/users/login
+ */
+export const POST = async function(request: NextRequest) {
+  const { data, error} = CredentialDto.safeParse(await request.json());
+  if (error) { return Response.json({ message: "Bad Request" }, { status: 400 }) }
 
-    // WICHTIG: In der Realität hier das Passwort vergleichen!
-    // const user = await db.findOne({ email });
-    // const passwordMatch = await bcrypt.compare(password, user.password);
-    // if (!user || !passwordMatch) { ... }
+  const user = await userDb().findOneAsync({ email: data.email });
 
-    const user = await db.findOne({ email, password });
-    if (!user) {
-      return NextResponse.json({ message: "Wrong login" }, { status: 401 });
-    }
-
-    const token = await new SignJWT({ email: user.email, id: user._id }) // Besser die User-ID statt E-Mail nehmen
-      .setProtectedHeader({ alg: "HS256" })
-      .setIssuedAt()
-      .setExpirationTime("2h")
-      .sign(JWT_SECRET);
-
-    return NextResponse.json({ token });
-  } catch (err) {
-    console.error("Login error:", err);
-    return NextResponse.json({ message: "Server error" }, { status: 500 });
+  if (user && bcrypt.compareSync(data.password, user.passwordHash)) {
+    return Response.json({
+      email: user.email,
+      jwt: await generateToken({ _userId: user._id })
+    });
   }
+  return Response.json({ }, { status: 401 })
 }
