@@ -1,4 +1,5 @@
-import Datastore from "nedb-promises";
+// Use CommonJS require with an any type to avoid missing type declarations
+const Datastore: any = require("nedb-promises");
 
 export interface User {
   email: string;
