@@ -18,9 +18,12 @@ export const POST = async function(request: NextRequest) {
 
   if (user && bcrypt.compareSync(data.password, user.passwordHash)) {
     return Response.json({
-      email: user.email,
-      jwt: await generateToken({ _userId: user._id })
-    });
+  email: user.email,
+  jwt: await generateToken({ 
+    _userId: user._id,
+    email: user.email 
+  })
+});
   }
   return Response.json({ }, { status: 401 })
 }

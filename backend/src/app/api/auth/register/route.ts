@@ -22,7 +22,10 @@ export const POST = async function(request: NextRequest) {
     passwordHash: bcrypt.hashSync(data.password)
   });
   return Response.json({
-    email: data.email,
-    jwt: await generateToken({ _userId: newUser._id })
-  });
+  email: data.email,
+  jwt: await generateToken({ 
+    _userId: newUser._id,
+    email: data.email 
+  })
+});
 }
