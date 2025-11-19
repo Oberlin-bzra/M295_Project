@@ -37,7 +37,7 @@ function updateNavigation(): void {
     
     loginButton.outerHTML = `
       <div class="user-info">
-        <span class="user-email"> User: ${email || 'User'}</span>
+        <span class="user-email"> User:${email || 'User'}</span>
         <button id="logout-btn" class="btn btn-primary">Logout</button>
       </div>
     `;
