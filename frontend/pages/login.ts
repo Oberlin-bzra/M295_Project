@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ email, password })
       });
 
-      const data = await res.json();
-      if (res.ok && data.token) {
-        localStorage.setItem("token", data.token); 
+      const data: { jwt:string, email:string } | { message:string } = await res.json();
+      if ('jwt' in data) {
+        localStorage.setItem("token", data.jwt); 
         message.textContent = "Login successful. Redirecting...";
         message.className = "success";
         setTimeout(() => (window.location.href = "/dashboard.html"), 800); 
