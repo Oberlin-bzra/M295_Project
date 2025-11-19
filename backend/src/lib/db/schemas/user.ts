@@ -5,7 +5,11 @@ export const User = z.object({
   _id: z.string().optional(),
   email: z.string(),
   passwordHash: z.string(),
-})
+  savedTeams: z.array(z.string()).max(1),
+  savedDrivers: z.array(z.string()).max(2),
+  savedVehicles: z.array(z.string()).max(1),
+});
+
 
 export declare type UserModel = z.infer<typeof User>
 
