@@ -91,7 +91,7 @@ export async function PUT(request: NextRequest) {
   if (type === 'team') {
     const currentTeams = user.savedTeams || []
     if (currentTeams.includes(id)) {
-      updateData.savedTeams = currentTeams.filter(t => t !== id)
+      updateData.savedTeams = []
     } else {
       updateData.savedTeams = [id]
     }
@@ -112,7 +112,7 @@ export async function PUT(request: NextRequest) {
   else if (type === 'vehicle') {
     const currentVehicles = user.savedVehicles || []
     if (currentVehicles.includes(id)) {
-      updateData.savedVehicles = currentVehicles.filter(v => v !== id)
+      updateData.savedVehicles = []
     } else {
       updateData.savedVehicles = [id]
     }
