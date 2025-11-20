@@ -392,3 +392,116 @@ header {
   font-size: 1.2rem;
   line-height: 1;
 }
+
+/* Garage Styles */
+.garage-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.garage-section {
+  margin-bottom: 3rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .garage-section {
+  background: #222;
+}
+
+.garage-section h2 {
+  color: #e10600;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.garage-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.garage-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #e10600;
+}
+
+body.dark-mode .garage-card {
+  background: #2b2b2b;
+}
+
+.garage-card h3 {
+  color: #e10600;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.garage-card p {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+body.dark-mode .garage-card p {
+  color: #f8f9fa;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+body.dark-mode .empty-message {
+  color: #999;
+}
+
+.login-warning,
+.error-message {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: 3rem auto;
+}
+
+body.dark-mode .login-warning,
+body.dark-mode .error-message {
+  background: #222;
+}
+
+.login-warning h2,
+.error-message h2 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.star-header {
+  cursor: default !important;
+}
+
+.favBtn {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favTd {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
