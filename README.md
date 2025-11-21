@@ -1,19 +1,79 @@
-# M295-Project | Apex Tracker
 
 # 🏎️ Apex Tracker
 
-**Beschreibung:**
-Der *F1 Apex Tracker* ist eine Web-App, mit der Benutzer Formel-1-Daten wie Fahrer, Teams, Fahrzeuge und Rennen verwalten können.
-Benutzer können sich registrieren, einloggen und ihre persönliche Garage mit Favoriten anlegen.
-Admins können zusätzlich alle Daten bearbeiten und Statistiken über Teams und Fahrer anzeigen.
+F1 Data-Tracker für Teams, Fahrer und Fahrzeuge.
+Modul 295 Projekt - BWZ Rapperswil-Jona
 
-**Ziel:**
-Das Projekt wurde im Modul 295 erstellt, um ein eigenes Backend mit Next.js, REST-API und einer NoSQL-Datenbank (MongoDB) zu realisieren.
-Es zeigt Authentifizierung (Webnative / JWT), CRUD-Funktionen und Benutzerrollen (User / Admin).
+---
 
-**Technologien:**
-Next.js · TypeScript · MongoDB (NoSQL) · JWT / Webnative
+## Technologien
 
+**Backend:** Next.js, TypeScript, NeDB, JWT
+**Frontend:** Vite, TypeScript, HTML/CSS
 
+---
 
-© 2025 Noel Oberlin und Felix Vogele
+## Installation
+
+### 1. Repository klonen
+
+```bash
+git clone <repository-url>
+cd m295-apex-tracker
+```
+
+### 2. Backend starten
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+→ Läuft auf http://localhost:3000
+
+### 3. Frontend starten (neues Terminal)
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+→ Läuft auf http://localhost:5173
+
+---
+
+## Konfiguration
+
+Erstelle `backend/.env`:
+
+```env
+JWT_SECRET=dein-geheimer-schluessel-hier-mindestens-64-zeichen
+```
+
+---
+
+## API Endpoints
+
+| Methode | Endpoint               | Beschreibung                  |
+| ------- | ---------------------- | ----------------------------- |
+| POST    | `/api/auth/register` | Registrierung                 |
+| POST    | `/api/auth/login`    | Login                         |
+| GET     | `/api/garage`        | Favoriten abrufen             |
+| PUT     | `/api/garage`        | Favorit hinzufügen/entfernen |
+
+---
+
+## Test-Login
+
+| E-Mail            | Passwort  |
+| ----------------- | --------- |
+| admin@example.com | $user1234 |
+
+---
+
+## Autoren
+
+Noel Oberlin & Felix Vogele
+© 2025
