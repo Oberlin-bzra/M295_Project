@@ -40,7 +40,7 @@ npm install
 npm run dev
 ```
 
-→ Läuft auf http://localhost:5173
+→ Läuft auf http://localhost:8100
 
 ---
 
