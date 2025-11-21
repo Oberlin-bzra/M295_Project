@@ -496,12 +496,44 @@ body.dark-mode .error-message {
   justify-content: center;
 }
 
-.favTd {
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+      .star-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 16px;
+        line-height: 16px;
+        padding: 0;
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+
+      .star-btn.active {
+        color: gold;
+      }
+
+      .star-header {
+        width: 24px;
+        text-align: center;
+        padding: 4px;
+      }
+
+      td:last-child {
+        padding-top: 2px;
+        padding-bottom: 2px;
+      }
+
+      td, th {
+        padding: 6px 8px;
+      }
+
+      .sort-arrow {
+        opacity: 0.5;
+      }
+
+body:not(.dark-mode) .star-btn {
+  color: black !important;
+}
+
+body:not(.dark-mode) .star-btn.active {
+  color: gold !important;
 }
