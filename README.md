@@ -8,8 +8,8 @@ Modul 295 Projekt - BWZ Rapperswil-Jona
 
 ## Technologien
 
-**Backend:** Next.js, TypeScript, NeDB, JWT
-**Frontend:** Vite, TypeScript, HTML/CSS
+**Backend:** Next.js, TypeScript, JavaScript, NeDB, JWT
+**Frontend:** TypeScript, HTML/CSS
 
 ---
 
