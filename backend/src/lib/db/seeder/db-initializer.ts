@@ -9,9 +9,12 @@ export async function intializeData() {
   const dbEmpty = (await userDb().countAsync({}) === 0)
 
   if (dbEmpty) {
-    const admin = await userDb().insertAsync({
+    await userDb().insertAsync({
       email: 'admin@example.com',
-      passwordHash: bcrypt.hashSync('$user1234')
+      passwordHash: bcrypt.hashSync('changeme123'),
+      savedTeams: [],
+      savedDrivers: [],
+      savedVehicles: []
     })
 
   }

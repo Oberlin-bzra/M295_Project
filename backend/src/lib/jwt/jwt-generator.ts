@@ -1,6 +1,5 @@
 import { JWTPayload, SignJWT, jwtVerify } from 'jose'
 
-// Secret aus .env laden statt hardcoded
 const getSecretKey = () => {
   const secret = process.env.JWT_SECRET
   if (!secret) {
