@@ -8,6 +8,10 @@ interface UserProfile {
   savedVehicles: string[];
 }
 
+interface ApiError {
+  message: string;
+}
+
 function getToken(): string | null {
   return localStorage.getItem("token");
 }
@@ -62,7 +66,7 @@ async function loadProfile(): Promise<void> {
       }
     });
 
-    if (res.status === 401) {
+    if (res.status === 401 || res.status === 403) {
       localStorage.removeItem("token");
       hideElement(loading);
       showElement(loginRequired);
@@ -70,8 +74,19 @@ async function loadProfile(): Promise<void> {
     }
 
     if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.message || `HTTP ${res.status}`);
+      const contentType = res.headers.get("content-type");
+      let errorMsg = `HTTP ${res.status}`;
+      
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          const errorData: ApiError = await res.json();
+          errorMsg = errorData.message || errorMsg;
+        } catch (e) {
+          console.error("Failed to parse error JSON:", e);
+        }
+      }
+      
+      throw new Error(errorMsg);
     }
 
     const user: UserProfile = await res.json();
@@ -119,7 +134,12 @@ async function updateEmail(newEmail: string): Promise<void> {
       body: JSON.stringify({ email: newEmail })
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get("content-type");
+    let data: ApiError | { message: string; email: string } = { message: "Unbekannter Fehler" };
+    
+    if (contentType && contentType.includes("application/json")) {
+      data = await res.json();
+    }
 
     if (res.ok) {
       showMessage("email-message", "E-Mail erfolgreich aktualisiert!", true);
@@ -131,7 +151,8 @@ async function updateEmail(newEmail: string): Promise<void> {
         input.placeholder = newEmail;
       }
     } else {
-      showMessage("email-message", data.message || "Fehler beim Aktualisieren", false);
+      const message = 'message' in data ? data.message : "Fehler beim Aktualisieren";
+      showMessage("email-message", message, false);
     }
   } catch (err) {
     console.error("Update email error:", err);
@@ -156,7 +177,12 @@ async function updatePassword(currentPassword: string, newPassword: string): Pro
       body: JSON.stringify({ currentPassword, newPassword })
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get("content-type");
+    let data: ApiError = { message: "Unbekannter Fehler" };
+    
+    if (contentType && contentType.includes("application/json")) {
+      data = await res.json();
+    }
 
     if (res.ok) {
       showMessage("password-message", "Passwort erfolgreich geändert!", true);
@@ -189,7 +215,12 @@ async function deleteAccount(password: string): Promise<void> {
       body: JSON.stringify({ password })
     });
 
-    const data = await res.json();
+    const contentType = res.headers.get("content-type");
+    let data: ApiError = { message: "Unbekannter Fehler" };
+    
+    if (contentType && contentType.includes("application/json")) {
+      data = await res.json();
+    }
 
     if (res.ok) {
       showMessage("delete-message", "Account gelöscht. Auf Wiedersehen!", true);
