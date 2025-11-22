@@ -47,7 +47,6 @@ export const vehicles = [
   { _id: "vehicle_RB2", model: "VCARB 01", engine: "Honda RBPT", teamId: "team_RB2", driverIds: ["driver_TSU", "driver_RIC"], horsepower: 1015, year: 2024 },
 ]
 
-// Hilfsfunktionen um Namen statt IDs zu bekommen
 export function getDriverNames(driverIds: string[]): string[] {
   return driverIds.map(id => {
     const driver = drivers.find(d => d._id === id)

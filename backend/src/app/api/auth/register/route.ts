@@ -19,7 +19,10 @@ export const POST = async function(request: NextRequest) {
 
   const newUser = await userDb().insertAsync({
     email: data.email,
-    passwordHash: bcrypt.hashSync(data.password)
+    passwordHash: bcrypt.hashSync(data.password),
+    savedTeams: [],
+    savedDrivers: [],
+    savedVehicles: []
   });
   return Response.json({
   email: data.email,
