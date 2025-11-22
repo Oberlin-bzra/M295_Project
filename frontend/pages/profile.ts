@@ -12,15 +12,29 @@ function getToken(): string | null {
   return localStorage.getItem("token");
 }
 
+function showElement(el: HTMLElement | null): void {
+  if (el) {
+    el.classList.remove('hidden');
+    el.style.display = 'block';
+  }
+}
+
+function hideElement(el: HTMLElement | null): void {
+  if (el) {
+    el.classList.add('hidden');
+    el.style.display = 'none';
+  }
+}
+
 function showMessage(elementId: string, message: string, isSuccess: boolean): void {
   const el = document.getElementById(elementId);
   if (!el) return;
   el.textContent = message;
   el.className = `message ${isSuccess ? 'success' : 'error'}`;
-  el.style.display = 'block';
+  showElement(el);
   
   setTimeout(() => {
-    el.style.display = 'none';
+    hideElement(el);
   }, 5000);
 }
 
@@ -30,9 +44,12 @@ async function loadProfile(): Promise<void> {
   const loginRequired = document.getElementById("login-required");
   const profileContent = document.getElementById("profile-content");
 
+  hideElement(loginRequired);
+  hideElement(profileContent);
+
   if (!token) {
-    if (loading) loading.style.display = "none";
-    if (loginRequired) loginRequired.style.display = "block";
+    hideElement(loading);
+    showElement(loginRequired);
     return;
   }
 
@@ -47,19 +64,20 @@ async function loadProfile(): Promise<void> {
 
     if (res.status === 401) {
       localStorage.removeItem("token");
-      if (loading) loading.style.display = "none";
-      if (loginRequired) loginRequired.style.display = "block";
+      hideElement(loading);
+      showElement(loginRequired);
       return;
     }
 
     if (!res.ok) {
-      throw new Error("Failed to load profile");
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.message || `HTTP ${res.status}`);
     }
 
     const user: UserProfile = await res.json();
 
-    if (loading) loading.style.display = "none";
-    if (profileContent) profileContent.style.display = "block";
+    hideElement(loading);
+    showElement(profileContent);
 
     const userIdEl = document.getElementById("user-id");
     const userEmailEl = document.getElementById("user-email");
@@ -70,20 +88,26 @@ async function loadProfile(): Promise<void> {
 
     if (userIdEl) userIdEl.textContent = user._id;
     if (userEmailEl) userEmailEl.textContent = user.email;
-    if (savedTeamsEl) savedTeamsEl.textContent = String(user.savedTeams.length);
-    if (savedDriversEl) savedDriversEl.textContent = String(user.savedDrivers.length);
-    if (savedVehiclesEl) savedVehiclesEl.textContent = String(user.savedVehicles.length);
+    if (savedTeamsEl) savedTeamsEl.textContent = String(user.savedTeams?.length || 0);
+    if (savedDriversEl) savedDriversEl.textContent = String(user.savedDrivers?.length || 0);
+    if (savedVehiclesEl) savedVehiclesEl.textContent = String(user.savedVehicles?.length || 0);
     if (newEmailInput) newEmailInput.placeholder = user.email;
 
   } catch (err) {
     console.error("Error loading profile:", err);
-    if (loading) loading.textContent = "Fehler beim Laden des Profils.";
+    if (loading) {
+      loading.textContent = `Fehler beim Laden des Profils: ${err instanceof Error ? err.message : 'Unbekannter Fehler'}`;
+      loading.style.color = 'red';
+    }
   }
 }
 
 async function updateEmail(newEmail: string): Promise<void> {
   const token = getToken();
-  if (!token) return;
+  if (!token) {
+    showMessage("email-message", "Nicht eingeloggt", false);
+    return;
+  }
 
   try {
     const res = await fetch(`${API_BASE}/user`, {
@@ -102,18 +126,25 @@ async function updateEmail(newEmail: string): Promise<void> {
       const userEmailEl = document.getElementById("user-email");
       if (userEmailEl) userEmailEl.textContent = newEmail;
       const input = document.getElementById("new-email") as HTMLInputElement;
-      if (input) input.value = "";
+      if (input) {
+        input.value = "";
+        input.placeholder = newEmail;
+      }
     } else {
       showMessage("email-message", data.message || "Fehler beim Aktualisieren", false);
     }
   } catch (err) {
-    showMessage("email-message", "Verbindungsfehler", false);
+    console.error("Update email error:", err);
+    showMessage("email-message", "Verbindungsfehler zum Server", false);
   }
 }
 
 async function updatePassword(currentPassword: string, newPassword: string): Promise<void> {
   const token = getToken();
-  if (!token) return;
+  if (!token) {
+    showMessage("password-message", "Nicht eingeloggt", false);
+    return;
+  }
 
   try {
     const res = await fetch(`${API_BASE}/user`, {
@@ -136,13 +167,17 @@ async function updatePassword(currentPassword: string, newPassword: string): Pro
       showMessage("password-message", data.message || "Fehler beim Ändern", false);
     }
   } catch (err) {
-    showMessage("password-message", "Verbindungsfehler", false);
+    console.error("Update password error:", err);
+    showMessage("password-message", "Verbindungsfehler zum Server", false);
   }
 }
 
 async function deleteAccount(password: string): Promise<void> {
   const token = getToken();
-  if (!token) return;
+  if (!token) {
+    showMessage("delete-message", "Nicht eingeloggt", false);
+    return;
+  }
 
   try {
     const res = await fetch(`${API_BASE}/user`, {
@@ -166,7 +201,8 @@ async function deleteAccount(password: string): Promise<void> {
       showMessage("delete-message", data.message || "Fehler beim Löschen", false);
     }
   } catch (err) {
-    showMessage("delete-message", "Verbindungsfehler", false);
+    console.error("Delete account error:", err);
+    showMessage("delete-message", "Verbindungsfehler zum Server", false);
   }
 }
 

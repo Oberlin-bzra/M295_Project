@@ -13,6 +13,10 @@ function corsHeaders() {
   }
 }
 
+function jsonResponse(data: object, status: number = 200) {
+  return NextResponse.json(data, { status, headers: corsHeaders() })
+}
+
 export async function OPTIONS() {
   return NextResponse.json({}, { headers: corsHeaders() })
 }
@@ -26,185 +30,168 @@ const UpdateProfileDto = z.object({
 export async function GET(request: NextRequest) {
   try {
     const token = getJwtHeader(request)
+    
+    if (!token) {
+      return jsonResponse({ message: 'No token provided' }, 401)
+    }
+
     const payload = await verifyToken(token)
     
-    if (!payload._userId) {
-      return NextResponse.json(
-        { message: 'Unauthorized' }, 
-        { status: 401, headers: corsHeaders() }
-      )
+    if (!payload || !payload._userId) {
+      return jsonResponse({ message: 'Invalid or expired token' }, 401)
     }
 
-    const user = await userDb().findOneAsync({ _id: payload._userId })
+    const user = await userDb().findOneAsync({ _id: payload._userId as string })
     
     if (!user) {
-      return NextResponse.json(
-        { message: 'User not found' }, 
-        { status: 404, headers: corsHeaders() }
-      )
+      return jsonResponse({ message: 'User not found' }, 404)
     }
 
-    return NextResponse.json({
+    return jsonResponse({
       _id: user._id,
       email: user.email,
       savedTeams: user.savedTeams || [],
       savedDrivers: user.savedDrivers || [],
       savedVehicles: user.savedVehicles || []
-    }, { headers: corsHeaders() })
+    })
     
   } catch (err) {
     console.error('GET /api/user error:', err)
-    return NextResponse.json(
-      { message: 'Server error' }, 
-      { status: 500, headers: corsHeaders() }
-    )
+    return jsonResponse({ message: 'Server error' }, 500)
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
     const token = getJwtHeader(request)
-    const payload = await verifyToken(token)
     
-    if (!payload._userId) {
-      return NextResponse.json(
-        { message: 'Unauthorized' }, 
-        { status: 401, headers: corsHeaders() }
-      )
+    if (!token) {
+      return jsonResponse({ message: 'No token provided' }, 401)
     }
 
-    const body = await request.json()
+    const payload = await verifyToken(token)
+    
+    if (!payload || !payload._userId) {
+      return jsonResponse({ message: 'Invalid or expired token' }, 401)
+    }
+
+    let body
+    try {
+      body = await request.json()
+    } catch {
+      return jsonResponse({ message: 'Invalid JSON body' }, 400)
+    }
+
     const { data, error } = UpdateProfileDto.safeParse(body)
     
     if (error) {
-      return NextResponse.json(
-        { message: 'Invalid data', errors: error.errors }, 
-        { status: 400, headers: corsHeaders() }
-      )
+      return jsonResponse({ 
+        message: 'Invalid data', 
+        errors: error.errors.map(e => e.message) 
+      }, 400)
     }
 
-    const user = await userDb().findOneAsync({ _id: payload._userId })
+    const user = await userDb().findOneAsync({ _id: payload._userId as string })
     
     if (!user) {
-      return NextResponse.json(
-        { message: 'User not found' }, 
-        { status: 404, headers: corsHeaders() }
-      )
+      return jsonResponse({ message: 'User not found' }, 404)
     }
 
     const updateData: { email?: string; passwordHash?: string } = {}
 
     if (data.email && data.email !== user.email) {
       const existingUser = await userDb().findOneAsync({ email: data.email })
-      if (existingUser) {
-        return NextResponse.json(
-          { message: 'Email already in use' }, 
-          { status: 409, headers: corsHeaders() }
-        )
+      if (existingUser && existingUser._id !== user._id) {
+        return jsonResponse({ message: 'Email already in use' }, 409)
       }
       updateData.email = data.email
     }
 
     if (data.newPassword) {
       if (!data.currentPassword) {
-        return NextResponse.json(
-          { message: 'Current password required' }, 
-          { status: 400, headers: corsHeaders() }
-        )
+        return jsonResponse({ message: 'Current password required' }, 400)
       }
       
-      if (!bcrypt.compareSync(data.currentPassword, user.passwordHash)) {
-        return NextResponse.json(
-          { message: 'Current password incorrect' }, 
-          { status: 401, headers: corsHeaders() }
-        )
+      const passwordValid = bcrypt.compareSync(data.currentPassword, user.passwordHash)
+      if (!passwordValid) {
+        return jsonResponse({ message: 'Current password incorrect' }, 401)
       }
       
-      updateData.passwordHash = bcrypt.hashSync(data.newPassword)
+      updateData.passwordHash = bcrypt.hashSync(data.newPassword, 10)
     }
 
     if (Object.keys(updateData).length === 0) {
-      return NextResponse.json(
-        { message: 'No changes provided' }, 
-        { status: 400, headers: corsHeaders() }
-      )
+      return jsonResponse({ message: 'No changes provided' }, 400)
     }
 
-    await userDb().updateAsync(
-      { _id: payload._userId },
-      { $set: updateData }
+    const result = await userDb().updateAsync(
+    { _id: payload._userId as string },
+    { $set: updateData }
     )
 
-    return NextResponse.json({ 
+    if (result.numAffected === 0) {
+    return jsonResponse({ message: 'Update failed' }, 500)
+    }
+
+    return jsonResponse({ 
       message: 'Profile updated successfully',
       email: updateData.email || user.email
-    }, { headers: corsHeaders() })
+    })
     
   } catch (err) {
     console.error('PUT /api/user error:', err)
-    return NextResponse.json(
-      { message: 'Server error' }, 
-      { status: 500, headers: corsHeaders() }
-    )
+    return jsonResponse({ message: 'Server error' }, 500)
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
     const token = getJwtHeader(request)
-    const payload = await verifyToken(token)
     
-    if (!payload._userId) {
-      return NextResponse.json(
-        { message: 'Unauthorized' }, 
-        { status: 401, headers: corsHeaders() }
-      )
+    if (!token) {
+      return jsonResponse({ message: 'No token provided' }, 401)
     }
 
-    let body = {}
+    const payload = await verifyToken(token)
+    
+    if (!payload || !payload._userId) {
+      return jsonResponse({ message: 'Invalid or expired token' }, 401)
+    }
+
+    let body: { password?: string } = {}
     try {
       body = await request.json()
     } 
     catch {
     }
     
-    const { password } = body as { password?: string }
+    const { password } = body
 
     if (!password) {
-      return NextResponse.json(
-        { message: 'Password confirmation required' }, 
-        { status: 400, headers: corsHeaders() }
-      )
+      return jsonResponse({ message: 'Password confirmation required' }, 400)
     }
 
-    const user = await userDb().findOneAsync({ _id: payload._userId })
+    const user = await userDb().findOneAsync({ _id: payload._userId as string })
     
     if (!user) {
-      return NextResponse.json(
-        { message: 'User not found' }, 
-        { status: 404, headers: corsHeaders() }
-      )
+      return jsonResponse({ message: 'User not found' }, 404)
     }
 
-    if (!bcrypt.compareSync(password, user.passwordHash)) {
-      return NextResponse.json(
-        { message: 'Password incorrect' }, 
-        { status: 401, headers: corsHeaders() }
-      )
+    const passwordValid = bcrypt.compareSync(password, user.passwordHash)
+    if (!passwordValid) {
+      return jsonResponse({ message: 'Password incorrect' }, 401)
     }
 
-    await userDb().removeAsync({ _id: payload._userId }, {})
+    const numRemoved = await userDb().removeAsync({ _id: payload._userId as string }, {})
 
-    return NextResponse.json(
-      { message: 'Account deleted successfully' }, 
-      { headers: corsHeaders() }
-    )
+    if (numRemoved === 0) {
+      return jsonResponse({ message: 'Delete failed' }, 500)
+    }
+
+    return jsonResponse({ message: 'Account deleted successfully' })
     
   } catch (err) {
     console.error('DELETE /api/user error:', err)
-    return NextResponse.json(
-      { message: 'Server error' }, 
-      { status: 500, headers: corsHeaders() }
-    )
+    return jsonResponse({ message: 'Server error' }, 500)
   }
 }

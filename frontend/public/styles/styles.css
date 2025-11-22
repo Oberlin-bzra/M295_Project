@@ -703,3 +703,16 @@ body:not(.dark-mode) .star-btn.active {
       padding: 2rem;
       color: #888;
     }
+
+
+  body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.dark-mode main,
+body.dark-mode .profile-container,
+body.dark-mode .profile-section {
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+}
