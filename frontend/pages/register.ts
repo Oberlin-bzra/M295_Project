@@ -1,7 +1,5 @@
 const registerApiUrl = "http://localhost:3000/api/auth/register";
 
-const registerapiUrl = "http://localhost:3000/api/auth/register";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("register-form") as HTMLFormElement;
   const message = document.getElementById("register-message") as HTMLParagraphElement;

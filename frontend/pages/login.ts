@@ -1,7 +1,5 @@
  const loginApiUrl = "http://localhost:3000/api/auth/login";
 
-const loginapiUrl = "http://localhost:3000/api/auth/login";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("login-form") as HTMLFormElement;
   const message = document.getElementById("login-message") as HTMLParagraphElement;
@@ -25,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("token", data.jwt); 
         message.textContent = "Login successful. Redirecting...";
         message.className = "success";
-        setTimeout(() => (window.location.href = "/dashboard.html"), 800); 
+        setTimeout(() => (window.location.href = "/index.html"), 800);
       } else {
         message.textContent = data.message || "Login failed";
         message.className = "error";
