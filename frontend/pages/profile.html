@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <link rel="icon" type="image/x-icon" href="/faviconNew.jpg" />
+  <title>ApexTracker - Profil</title>
+  <script type="module" src="/src/darkmode.ts"></script>
+  <script type="module" src="/src/auth-nav.ts"></script>
+</head>
+<body>
+  <header>
+    <a href="/index.html" class="logo-link"><h1>ApexTracker</h1></a>
+    <div class="nav-buttons">
+      <a href="/pages/login.html" class="btn btn-primary">Login</a>
+      <a href="/pages/dashboard.html" class="btn btn-secondary">Dashboard</a>
+      <a href="/pages/garage.html" class="btn btn-secondary">Garage</a>
+      <a href="/pages/profile.html" class="btn btn-secondary">Profil</a>
+      <button id="darkmode-btn"><span>🌙</span></button>
+    </div>
+  </header>
+
+  <main class="profile-container">
+    <h1 class="profile-title">Mein Profil</h1>
+    
+    <div id="loading">Lade Profil...</div>
+    
+    <div id="login-required" class="login-required hidden">
+      <h2>🔒 Nicht eingeloggt</h2>
+      <p>Du musst eingeloggt sein, um dein Profil zu sehen.</p>
+      <p><a href="/pages/login.html">Jetzt einloggen →</a></p>
+    </div>
+
+    <div id="profile-content" class="hidden">
+      <section class="profile-section">
+        <h2>👤 Profil-Informationen</h2>
+        <div class="user-info-display">
+          <p><strong>User-ID:</strong> <span id="user-id">-</span></p>
+          <p><strong>E-Mail:</strong> <span id="user-email">-</span></p>
+          <p><strong>Gespeicherte Teams:</strong> <span id="saved-teams-count">0</span></p>
+          <p><strong>Gespeicherte Fahrer:</strong> <span id="saved-drivers-count">0</span></p>
+          <p><strong>Gespeicherte Fahrzeuge:</strong> <span id="saved-vehicles-count">0</span></p>
+        </div>
+      </section>
+
+      <section class="profile-section">
+        <h2>✉️ E-Mail ändern</h2>
+        <form id="email-form">
+          <div class="form-group">
+            <label for="new-email">Neue E-Mail-Adresse</label>
+            <input type="email" id="new-email" placeholder="neue@email.com" required />
+          </div>
+          <button type="submit" class="btn-update">E-Mail aktualisieren</button>
+          <div id="email-message" class="message hidden"></div>
+        </form>
+      </section>
+
+      <section class="profile-section">
+        <h2>🔑 Passwort ändern</h2>
+        <form id="password-form">
+          <div class="form-group">
+            <label for="current-password">Aktuelles Passwort</label>
+            <input type="password" id="current-password" placeholder="••••••••" required />
+          </div>
+          <div class="form-group">
+            <label for="new-password">Neues Passwort</label>
+            <input type="password" id="new-password" placeholder="••••••••" minlength="6" required />
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Neues Passwort bestaetigen</label>
+            <input type="password" id="confirm-password" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn-update">Passwort ändern</button>
+          <div id="password-message" class="message hidden"></div>
+        </form>
+      </section>
+
+      <section class="profile-section danger-zone">
+        <h2>⚠️ Gefahrenzone</h2>
+        <p class="warning-text">
+          Das Loeschen deines Accounts ist unwiderruflich. Alle deine Daten werden permanent geloescht.
+        </p>
+        <form id="delete-form">
+          <div class="form-group">
+            <label for="delete-password">Passwort zur Bestaetigung</label>
+            <input type="password" id="delete-password" placeholder="••••••••" required />
+          </div>
+          <button type="submit" class="btn-delete">🗑️ Account unwiderruflich loeschen</button>
+          <div id="delete-message" class="message hidden"></div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <small>&copy; 2025 ApexTracker</small> |
+    <small><a href="./impressum.html">Impressum</a></small>
+  </footer>
+
+  <script type="module" src="./profile.ts"></script>
+</body>
+</html>
