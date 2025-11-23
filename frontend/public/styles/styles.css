@@ -718,3 +718,66 @@ body.dark-mode .profile-section {
   background-color: #1a1a1a;
   color: #f0f0f0;
 }
+
+
+
+table a {
+  color: #e10600;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  padding: 2px 4px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+table a:active {
+  transform: translateY(0);
+}
+
+body.dark-mode table a {
+  color: #ff4d4d;
+}
+
+body.dark-mode table a:hover {
+  color: #fff;
+  background-color: #ff4d4d;
+}
+
+table td {
+  position: relative;
+}
+
+table td a {
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+table a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 50%;
+  background-color: #e10600;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+table a:hover::after {
+  width: 100%;
+}
+
+body.dark-mode table a::after {
+  background-color: #ff4d4d;
+}
+
+body.dark-mode table a:hover::after {
+  background-color: #fff;
+}
+
+body.dark-mode table td a {
+  color: #e10600;
+}
